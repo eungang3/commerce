@@ -1,0 +1,133 @@
+:root {
+  --purple: #9e54ff;
+  --border-gray: #d5d5d5;
+  --pale-gray: #e6e6e6;
+  --smallest-font: 0.75rem;
+  --spacing-xxs: 0.5rem;
+  --spacing-xs: 1rem;
+  --spacing-s: 1.5rem;
+  --spacing-m: 2rem;
+  --spacing-l: 2.5rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 3.5rem;
+  --spacing-xxl-2: 4rem;
+  --spacing-xxl-3: 4.5rem;
+  --spacing-xxl-4: 5rem;
+}
+
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* navigation 공통 */
+
+nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.inner {
+  display: flex;
+  padding-right: var(--spacing-xl);
+  padding-left: var(--spacing-xl);
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (min-width: 1281px){
+ .inner {
+    width: 1194px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* navigation - top */
+.menu-top {
+  width: 100%;
+  height: var(--spacing-m);
+  background-color: rgba(158, 84, 255, 0.1);
+}
+
+.menu-top .inner {
+  justify-content: flex-end;
+}
+
+.menu-top a {
+  font-size: var(--smallest-font);
+}
+
+.menu-top ul li:nth-child(1) {
+  margin-right: var(--spacing-s);
+}
+
+.menu-top a:visited {
+  color: black;
+}
+
+/* navigation - middle */
+.menu-middle {
+  width: 100%;
+  align-items: center;
+  height: 5rem;
+}
+
+.innermost {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 6rem;
+}
+
+.logo {
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--spacing-m);
+  color: var(--purple)
+}
+
+.right {
+  display: flex;
+  flex-direction: row;
+}
+
+.right button {
+  width: 8rem;
+  height: var(--spacing-l);
+  border-radius: 1.2rem;
+  background-color: var(--purple);
+  color: white;
+  margin-right: 1.5rem;
+}
+
+.profile {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  border: solid 1px #ffffff;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.16);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+/* navigation - bottom */
+.menu-bottom {
+  border: solid 1px;
+}
