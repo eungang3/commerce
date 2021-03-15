@@ -3,6 +3,7 @@
   --border-gray: #d5d5d5;
   --pale-gray: #e6e6e6;
   --smallest-font: 0.75rem;
+  --title-font-size: 1.5rem;
   --spacing-xxs: 0.5rem;
   --spacing-xs: 1rem;
   --spacing-s: 1.5rem;
@@ -25,6 +26,23 @@
   font-family: 'Noto Sans KR', sans-serif;
 }
 
+a {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+html {
+  height: 100vh;
+}
+
+body{
+  height: 100%;
+
+}
+
 /* navigation 공통 */
 
 nav {
@@ -32,8 +50,13 @@ nav {
   flex-direction: column;
 }
 
+nav > div {
+  display: flex;
+}
+
 .inner {
   display: flex;
+  width: 100%;
   padding-right: var(--spacing-xl);
   padding-left: var(--spacing-xl);
 }
@@ -44,7 +67,7 @@ nav ul {
 }
 
 @media (min-width: 1281px){
- .inner {
+ .inner, main {
     width: 1194px;
     margin-left: auto;
     margin-right: auto;
@@ -70,15 +93,11 @@ nav ul {
   margin-right: var(--spacing-s);
 }
 
-.menu-top a:visited {
-  color: black;
-}
-
 /* navigation - middle */
 .menu-middle {
   width: 100%;
   align-items: center;
-  height: 5rem;
+  height: 6rem;
 }
 
 .innermost {
@@ -101,7 +120,7 @@ nav ul {
   flex-direction: row;
 }
 
-.right button {
+.sell {
   width: 8rem;
   height: var(--spacing-l);
   border-radius: 1.2rem;
@@ -127,7 +146,68 @@ nav ul {
   border-radius: 50%;
 }
 
+/* dropdown */
+.dropdown {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+.hoverable-profile:hover .dropdown{
+  display: block;
+}
+
+.dropdown p {
+  font-weight: bold;
+}
+
+.menus li {
+  font-size: var(--smallest-font);
+}
+
 /* navigation - bottom */
 .menu-bottom {
-  border: solid 1px;
+  width: 100%;
+  align-items: center;
+  height: var(--spacing-xxl-2);
+  border-top: var(--border-gray) 1px solid;
+  border-bottom: var(--border-gray) 1px solid;
 }
+
+.categories {
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* main 공통 */
+.container {
+  display: flex;
+  padding: var(--spacing-m) var(--spacing-xl); 
+  min-height: 70%;
+}
+
+.title {
+  font-size: var(--title-font-size);
+}
+
+/* footer */
+footer {
+  height: 7rem;
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  align-items: center;
+  font-size: var(--smallest-font);
+}
+
+.copyright {
+  margin-left: auto;
+}
+
+footer .logo {
+  color: black;
+  font-size: 1rem;
+  margin-right: var(--spacing-xl);
+}
+

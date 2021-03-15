@@ -28,11 +28,34 @@
               <div class="logo">Gaji Market</div>
               <div class="right">
                 <button type="submit" class="sell">팔기</button>
-                <div class="profile">
-                  {% if user.is_authenticated %}
+                <button class="hoverable-profile">
+                    {% if user.is_authenticated %}
                       <img src="{% static 'auctions/' %}default_profile_member.svg">
                   {% else %}
                       <img src="{% static 'auctions/' %}default_profile.svg">
+                  {% endif %}
+                </button>
+                <div class="dropdown">
+                  {% if user.is_authenticated %}
+                    <div class="profile">
+                      <img src="{% static 'auctions/' %}default_profile_member.svg">
+                      <p>Sue12345678910</p>
+                    </div>
+                    <ul class="menus">
+                      <li><a href="#">내놓은 상품</a></li>
+                      <li><a href="#">위시리스트</a></li>
+                      <li><a href="#">로그아웃</a></li>
+                    </ul>
+
+                  {% else %}
+                  <div class="profile">
+                    <img src="{% static 'auctions/' %}default_profile.svg">
+                    <p>로그인이 필요합니다.</p>
+                  </div>
+                  <ul class="menus">
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                  </ul>
                   {% endif %}
                 </div>
               </div>
@@ -57,12 +80,28 @@
         </div>
       </nav>
 
-      <main>
+      <main class='container'>
         {% block body %}
         {% endblock %}
       </main>
 
       <footer>
+        <div class="inner">
+          <div class="logo">
+            Purple. Inc.
+          </div>
+          <div class="info">
+            <div class="address">
+              주소 : 식물시 야채구 채소대로 100
+            </div>
+            <div class="phone">
+              연락처 : 070-8888-8888
+            </div>
+          </div>
+          <div class="copyright">
+            Copyright Yeseul. All Rights Reserved.
+          </div>
+        </div>
       </footer>
     </body>
 </html>
