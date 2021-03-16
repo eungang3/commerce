@@ -25,38 +25,38 @@
         <div class="menu-middle">
           <div class="inner">
             <div class="innermost">
-              <div class="logo">Gaji Market</div>
+              <div class="logo"><a href="{% url 'index' %}">Gaji Market</a></div>
               <div class="right">
                 <button type="submit" class="sell">팔기</button>
-                <button class="hoverable-profile">
-                    {% if user.is_authenticated %}
-                      <img src="{% static 'auctions/' %}default_profile_member.svg">
-                  {% else %}
-                      <img src="{% static 'auctions/' %}default_profile.svg">
-                  {% endif %}
-                </button>
                 <div class="dropdown">
-                  {% if user.is_authenticated %}
-                    <div class="profile">
-                      <img src="{% static 'auctions/' %}default_profile_member.svg">
-                      <p>Sue12345678910</p>
-                    </div>
-                    <ul class="menus">
-                      <li><a href="#">내놓은 상품</a></li>
-                      <li><a href="#">위시리스트</a></li>
-                      <li><a href="#">로그아웃</a></li>
-                    </ul>
-
-                  {% else %}
-                  <div class="profile">
-                    <img src="{% static 'auctions/' %}default_profile.svg">
-                    <p>로그인이 필요합니다.</p>
+                  <button class="dropdown-btn">
+                    {% if user.is_authenticated %}
+                        <img class="profile" src="{% static 'auctions/' %}default_profile_member.svg">
+                    {% else %}
+                        <img class="profile" src="{% static 'auctions/' %}default_profile.svg">
+                    {% endif %}
+                  </button>
+                  <div class="dropdown-content">
+                    {% if user.is_authenticated %}
+                      <div class="dropdown-info"><p>{{ user.username }}</p>
+                      </div>
+                      <hr>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">내놓은 상품</a></li>
+                        <li><a href="#">위시리스트</a></li>
+                        <li><a href="{% url 'logout' %}">로그아웃</a></li>
+                      </ul>
+                    {% else %}
+                      <div class="dropdown-info">
+                        <p>로그인이 필요해요</p>
+                      </div>
+                      <hr>
+                      <ul class="dropdown-menu">
+                        <li><a href="{% url 'login' %}">로그인</a></li>
+                        <li><a href="{% url 'register' %}">회원가입</a></li>
+                      </ul>
+                    {% endif %}
                   </div>
-                  <ul class="menus">
-                    <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원가입</a></li>
-                  </ul>
-                  {% endif %}
                 </div>
               </div>
             </div>
@@ -66,15 +66,9 @@
         <div class="menu-bottom">
           <div class="inner">
             <ul class="categories">
-              <li>item</li>
-              <li>item</li>
-              <li>item</li>
-              <li>item</li>
-              <li>item</li>
-              <li>item</li>
-              <li>item</li>
-              <li>item</li>
-              <li>item</li>
+              {% for category in categories %}
+              <li>{{ category.category_name }}</li>
+              {% endfor %}
             </ul>
           </div>
         </div>

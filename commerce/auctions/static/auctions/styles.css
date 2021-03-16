@@ -109,7 +109,7 @@ nav ul {
   height: 6rem;
 }
 
-.logo {
+.logo a {
   font-family: 'Poppins', sans-serif;
   font-size: var(--spacing-m);
   color: var(--purple)
@@ -118,6 +118,7 @@ nav ul {
 .right {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .sell {
@@ -129,42 +130,65 @@ nav ul {
   margin-right: 1.5rem;
 }
 
+/* dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-btn {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+}
+
 .profile {
   width: 2.8rem;
   height: 2.8rem;
   border-radius: 50%;
-  border: solid 1px #ffffff;
+  border: white 0.2rem solid;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.16);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
-
-.profile img {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-}
-
-/* dropdown */
-.dropdown {
+.dropdown-content {
   display: none;
   position: absolute;
   z-index: 1;
-  border-radius: 10px;
+  min-width: 10rem;
+  background-color: #ffffff;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 0.25rem;
+  padding: 1rem 1rem 0.5rem 1rem;
+  right: 0;
+  left: auto;
+  margin-top: 0.2rem;
 }
 
-.hoverable-profile:hover .dropdown{
-  display: block;
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
 }
 
-.dropdown p {
+.dropdown-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dropdown hr {
+  border-top: solid 1px var(--border-gray);
+  margin: 0.8rem 0;
+}
+
+.dropdown-info p {
   font-weight: bold;
 }
 
-.menus li {
-  font-size: var(--smallest-font);
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu li {
+  padding-bottom: 0.5rem;
 }
 
 /* navigation - bottom */
@@ -184,7 +208,7 @@ nav ul {
 /* main 공통 */
 .container {
   display: flex;
-  padding: var(--spacing-m) var(--spacing-xl); 
+  padding: var(--spacing-m) var(--spacing-xl);
   min-height: 70%;
 }
 
@@ -210,4 +234,3 @@ footer .logo {
   font-size: 1rem;
   margin-right: var(--spacing-xl);
 }
-
