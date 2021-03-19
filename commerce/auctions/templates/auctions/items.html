@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+{% load humanize %}
+
+{% block body %}
+<div class="listings_container">
+  <h1 class="title">{{ catname }}</h1>
+  <div class="listings">
+    {% for listing in listings %}
+    <a class="listing" href="">
+      <div class="top">
+        <img class="listing_photo" src="{{ listing.photo }}">
+      </div>
+      <div class="bottom">
+        <p class="listing_title">{{ listing.title }}</p>
+        <div class="info">
+          <p class="price">{{ listing.starting_price|intcomma }}원</p>
+          <p class="bidders">0 bids</p>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

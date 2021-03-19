@@ -6,12 +6,10 @@ from django.urls import reverse
 
 from .models import *
 
-
 def index(request):
     return render(request, "auctions/index.html", {
-        "categories": Category.objects.all()
+        "listings" : Listing.objects.all()
     })
-
 
 def login_view(request):
     if request.method == "POST":
@@ -63,3 +61,16 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+def get_items(request, catname):
+    category = Category.objects.filter(english_name=catname)[0]
+    return render(request, "auctions/items.html", {
+        "catname" : category,
+        "listings" : Listing.objects.filter(category_id=category.id)
+    })
+
+def get_all_items(request):
+    return render(request, "auctions/items.html", {
+        "catname" : "전체",
+        "listings" : Listing.objects.all()
+    })

@@ -67,7 +67,7 @@ nav ul {
 }
 
 @media (min-width: 1281px){
- .inner, main {
+ .inner, main{
     width: 1194px;
     margin-left: auto;
     margin-right: auto;
@@ -160,6 +160,7 @@ nav ul {
   right: 0;
   left: auto;
   margin-top: 0.2rem;
+   transition: all .25s ease;
 }
 
 .dropdown:hover .dropdown-content {
@@ -205,6 +206,7 @@ nav ul {
   justify-content: space-between;
 }
 
+
 /* main 공통 */
 .container {
   display: flex;
@@ -214,6 +216,61 @@ nav ul {
 
 .title {
   font-size: var(--title-font-size);
+  margin-bottom: var(--spacing-s);
+}
+
+/* index - listings */
+.listings_container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.listings {
+  display: grid;
+  grid-template: 1fr / repeat(4, 1fr);
+  gap: 2rem 1.8rem ;
+  max-width: 100%;
+}
+
+.listing {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px var(--pale-gray);
+  max-width: 17rem;
+}
+
+.listing_photo {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+}
+
+.listing > .bottom {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 0.25rem;
+}
+
+.price {
+  font-size: var(--title-font-size);
+  font-weight: bold;
+  color: var(--purple);
+}
+
+.bidders {
+  font-size: var(--smallest-font);
+  font-weight: bold;
 }
 
 /* footer */
@@ -230,6 +287,7 @@ footer {
 }
 
 footer .logo {
+  font-family: 'Poppins', sans-serif;
   color: black;
   font-size: 1rem;
   margin-right: var(--spacing-xl);
