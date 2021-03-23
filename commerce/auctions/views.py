@@ -64,8 +64,6 @@ def register(request):
 
 # for rendering each category page
 def get_items(request, catname):
-    print(request)
-    print(catname)
     category = Category.objects.filter(english_name=catname).first()
     return render(request, "auctions/items.html", {
         "catname" : category,
@@ -80,6 +78,7 @@ def get_all_items(request):
     })
 
 # for rendering each listing page
-def get_listing(request, listingid):
-    print(request, listingid)
-    return render(request, "auctions/listing.html")
+def get_listing(request, catname, listingid):
+    return render(request, "auctions/listing.html", {
+        "listing": Listing.objects.filter(id=listingid)
+    })
