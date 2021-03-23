@@ -25,3 +25,19 @@ class Listing(models.Model):
 
     def __str__(self):
         return f"{self.seller}, {self.title}, {self.description}, {self.starting_price}, {self.photo}, {self.active}, {self.winner}, {self.category}"
+
+class Bid(models.Model):
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="bidded_products")
+    bidder = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bidded")
+    price = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+    time = models.DateTimeField(auto_now=True)
+
+class Comment(models.Model):
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="commented_products")
+    writer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="wrote")
+    content = models.TextField()
+    time = models.DateTimeField(auto_now=True)
+
+class Watchlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="watched")
+    listing = models.ManyToManyField(Listing)

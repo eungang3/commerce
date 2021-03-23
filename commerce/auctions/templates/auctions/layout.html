@@ -68,7 +68,7 @@
             <ul class="categories">
               <li><a href="{% url 'get_all_items' %}">전체</a></li>
               {% for category in categories %}
-              <li><a href="{{ category.english_name }}">{{ category.korean_name }}</a></li>
+              <li><a href="/listings/{{ category.english_name }}">{{ category.korean_name }}</a></li>
               {% endfor %}
             </ul>
           </div>

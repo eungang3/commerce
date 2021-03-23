@@ -62,15 +62,24 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
+# for rendering each category page
 def get_items(request, catname):
-    category = Category.objects.filter(english_name=catname)[0]
+    print(request)
+    print(catname)
+    category = Category.objects.filter(english_name=catname).first()
     return render(request, "auctions/items.html", {
         "catname" : category,
-        "listings" : Listing.objects.filter(category_id=category.id)
+        "listings" : Listing.objects.filter(category=category.id)
     })
 
+# for rendering whole category page
 def get_all_items(request):
     return render(request, "auctions/items.html", {
         "catname" : "전체",
         "listings" : Listing.objects.all()
     })
+
+# for rendering each listing page
+def get_listing(request, listingid):
+    print(request, listingid)
+    return render(request, "auctions/listing.html")
