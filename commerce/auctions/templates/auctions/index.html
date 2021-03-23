@@ -6,7 +6,7 @@
   <h1 class="title">판매중인 상품</h1>
   <div class="listings">
     {% for listing in listings %}
-    <a class="listing" href="">
+    <a class="listing" href="listings/{{ listing.category.english_name }}/{{ listing.id }}">
       <div class="top">
         <img class="listing_photo" src="{{ listing.photo }}">
       </div>
