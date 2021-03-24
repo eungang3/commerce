@@ -1,4 +1,55 @@
 {% extends "auctions/layout.html" %}
+{% load humanize %}
+
 {% block body %}
-{{listing}}
+<div class="details">
+  <div class="detail_left">
+    <img src="{{ listing.photo }}">
+  </div>
+
+  <div class="detail_right">
+    <div class="texts">
+      <h2 class="detail_title">
+        {{ listing.title }}
+      </h2>
+      <div class="prices">
+        <div class="starting_container">
+          <p class="sub_name">시작 가격</p>
+          <p class="starting_price">{{ listing.starting_price|intcomma }}원</p>
+        </div>
+        <div class="current_container">
+          <p class="sub_name">현재 가격</p>
+          <p class="current_price">{{ current_price|intcomma }}원</p>
+          <p class="bidders">0 bidders</p>
+        </div>
+      </div>
+      <p class="description">{{ listing.description }}</p>
+      {% if user.is_authenticated %}
+      <form action="{% url 'place_bid' %}" method="post" class="bidding_form">
+        {{ bidding_form }}
+        {% csrf_token %}
+        <button class="btn bid">입찰하기</button>
+      </form>
+      {% else %}
+      <button class="btn before_loggin">입찰하려면 로그인이 필요해요</button>
+      {% endif %}
+    </div>
+    <div class="comments">
+      <div class="comments_title">
+        <p class="comments_titletext">댓글</p>
+        <p class="comments_count">10</p>
+      </div>
+      {% if user.is_authenticated %}
+      <form>
+        <button class="btn comments_btn">등록</button>
+      </form>
+      {% else %}
+      <div class="notice">
+        <p>로그인하시면 댓글을 남길 수 있어요.</p>
+        <button class="btn small_btn">로그인</button>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
 {% endblock %}

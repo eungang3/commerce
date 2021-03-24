@@ -2,6 +2,7 @@
   --purple: #9e54ff;
   --border-gray: #d5d5d5;
   --pale-gray: #e6e6e6;
+  --font-gray: #b3b3b3;
   --smallest-font: 0.75rem;
   --title-font-size: 1.5rem;
   --spacing-xxs: 0.5rem;
@@ -43,8 +44,29 @@ body{
 
 }
 
-/* navigation 공통 */
 
+/* footer */
+footer {
+  height: 7rem;
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  align-items: center;
+  font-size: var(--smallest-font);
+}
+
+.copyright {
+  margin-left: auto;
+}
+
+footer .logo {
+  font-family: 'Poppins', sans-serif;
+  color: black;
+  font-size: 1rem;
+  margin-right: var(--spacing-xl);
+}
+
+
+/* navigation 공통 */
 nav {
   display: flex;
   flex-direction: column;
@@ -121,13 +143,14 @@ nav ul {
   align-items: center;
 }
 
-.sell {
+.btn {
   width: 8rem;
   height: var(--spacing-l);
   border-radius: 1.2rem;
   background-color: var(--purple);
   color: white;
   margin-right: 1.5rem;
+  font-size: 1rem;
 }
 
 /* dropdown */
@@ -219,7 +242,7 @@ nav ul {
   margin-bottom: var(--spacing-s);
 }
 
-/* index - listings */
+/* listing thumbnails */
 .listings_container {
   display: flex;
   flex-direction: column;
@@ -270,25 +293,151 @@ nav ul {
 
 .bidders {
   font-size: var(--smallest-font);
+}
+
+/* each listing page*/
+.details {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.detail_right, .detail_left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.detail_left {
+  margin-right: var(--spacing-s);
+  flex-shrink: 1;
+}
+
+.detail_left img {
+  max-width: 100%;
+}
+
+.texts {
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  font-size: var(--title-font-size);
   font-weight: bold;
 }
 
-/* footer */
-footer {
-  height: 7rem;
-  background-color: rgb(248, 248, 248);
+.prices {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  margin: var(--spacing-xs) 0;
+  padding: var(--spacing-xxs) 0;
+  border-top: solid 1px;
+  border-bottom: solid 1px var(--border-gray);
+}
+
+.sub_name {
   font-size: var(--smallest-font);
+  font-weight: bold;
+  margin-right: var(--spacing-s);
 }
 
-.copyright {
-  margin-left: auto;
+ .starting_container, .current_container {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+ }
+
+.current_price {
+  font-size: var(--title-font-size);
+  font-weight: bold;
+  color: var(--purple);
 }
 
-footer .logo {
-  font-family: 'Poppins', sans-serif;
-  color: black;
-  font-size: 1rem;
-  margin-right: var(--spacing-xl);
+.current_container .bidders {
+  color: var(--font-gray);
+  margin-left: var(--spacing-xxs);
+}
+
+.description {
+  margin-bottom: var(--spacing-xs);
+}
+
+.before_loggin{
+  background-color: var(--border-gray);
+  min-width: 18rem;
+}
+
+/* bidding form */
+.bidding_form {
+  display: flex;
+  width: 100%;
+}
+
+label {
+  display: none;
+}
+
+.bidding_form input{
+  height: var(--spacing-l);
+  border-radius: 1.2rem;
+  border: 1px solid var(--border-gray);
+  width: 100%;
+  padding-left: var(--spacing-xs);
+  padding-right: var(--spacing-xs);
+}
+
+.bid {
+  min-width: 7rem;
+  margin-left: var(--spacing-xxs);
+  margin-right: 0;
+}
+
+/* comments */
+.comments {
+  margin-top : var(--spacing-xxl-3);
+}
+
+.comments_title {
+  border-bottom: 1px solid;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  padding-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.comments_count {
+  color: var(--purple);
+  margin-left: var(--spacing-xxs)
+}
+
+.small_btn {
+  height: 1.6rem;
+  width: 4rem;
+  background-color: white;
+  color: var(--purple);
+  border: 1px solid var(--purple);
+  font-size: var(--smallest-font);
+  margin-left: var(--spacing-xxs);
+}
+
+.comment {
+  border-bottom: 1px solid var(--border-gray);
+  padding-bottom: var(--spacing-xs);
+}
+
+.comments_btn {
+  background-color: white;
+  border: 1px solid var(--purple);
+  color: var(--purple);
+  width: 6rem;
+  height: 6rem;
+}
+
+.notice {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--border-gray);
+  padding-bottom: var(--spacing-xs);
 }
