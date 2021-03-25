@@ -87,13 +87,28 @@ class BiddingForm(ModelForm):
         widgets = {
             'price': forms.NumberInput(attrs={'placeholder': '입찰가를 입력하세요'}),
         }
+        labels = {
+            'price':''
+        }
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+        widgets = {
+            'content' : forms.TextInput(attrs={'placeholder': '댓글을 입력하세요'}),
+        }
+        labels = {
+            'content': ''
+        }
 
 # for rendering each listing page
 def get_listing(request, catname, listingid):
     return render(request, "auctions/listing.html", {
         "listing": Listing.objects.filter(id=listingid).first(),
         "current_price": "5000",
-        "bidding_form": BiddingForm()
+        "bidding_form": BiddingForm(),
+        "comment_form": CommentForm()
     })
 
 # when user places a bid, save it in database and redirect
@@ -108,5 +123,22 @@ def bid(request):
         return render(request, "auctions/listing.html", {
             "listing": Listing.objects.filter(id=listingid).first(),
             "current_price": "5000",
-            "bidding_form": BiddingForm()
+            "bidding_form": BiddingForm(),
+            "comment_form": CommentForm()
+        })
+
+# when user comments, save it in database and redirect
+def comment(request):
+    if request.method =="POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.cleaned_data['content']
+            return HttpResponseRedirect(reverse("index"))
+
+    else:
+        return render(request, "auctions/listing.html", {
+            "listing": Listing.objects.filter(id=listingid).first(),
+            "current_price": "5000",
+            "bidding_form": BiddingForm(),
+            "comment_form": CommentForm()
         })

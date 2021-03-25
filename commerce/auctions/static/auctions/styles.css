@@ -25,6 +25,7 @@
   text-decoration: none;
   list-style: none;
   font-family: 'Noto Sans KR', sans-serif;
+  letter-spacing: -0.4px;
 }
 
 a {
@@ -35,13 +36,20 @@ a:visited {
   color: black;
 }
 
+input, button {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
 html {
   height: 100vh;
 }
 
 body{
   height: 100%;
-
 }
 
 
@@ -322,17 +330,30 @@ nav ul {
   flex-direction: column;
 }
 
+.title_area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 h2 {
   font-size: var(--title-font-size);
   font-weight: bold;
+}
+
+.fa-heart {
+  font-size: 1.5rem;
+  color: var(--purple);
+  margin-left: 1.5rem;
 }
 
 .prices {
   display: flex;
   flex-direction: column;
   margin: var(--spacing-xs) 0;
-  padding: var(--spacing-xxs) 0;
-  border-top: solid 1px;
+  padding: var(--spacing-xs) 0;
+  border-top: solid 2px;
   border-bottom: solid 1px var(--border-gray);
 }
 
@@ -372,19 +393,17 @@ h2 {
 .bidding_form {
   display: flex;
   width: 100%;
+  position: relative;
 }
 
-label {
-  display: none;
-}
-
-.bidding_form input{
+.bidding_form input {
   height: var(--spacing-l);
   border-radius: 1.2rem;
   border: 1px solid var(--border-gray);
   width: 100%;
   padding-left: var(--spacing-xs);
   padding-right: var(--spacing-xs);
+  font-size: 1rem;
 }
 
 .bid {
@@ -399,45 +418,89 @@ label {
 }
 
 .comments_title {
-  border-bottom: 1px solid;
   display: flex;
   flex-direction: row;
   font-weight: bold;
-  padding-bottom: var(--spacing-xs);
   margin-bottom: var(--spacing-xs);
 }
 
 .comments_count {
   color: var(--purple);
-  margin-left: var(--spacing-xxs)
+  margin-left: 0.2rem;
 }
 
-.small_btn {
-  height: 1.6rem;
-  width: 4rem;
-  background-color: white;
-  color: var(--purple);
-  border: 1px solid var(--purple);
-  font-size: var(--smallest-font);
-  margin-left: var(--spacing-xxs);
+.comment_form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--spacing-l);
+  border-radius: 0.2rem;
+  border: 1px solid var(--border-gray);
+  width: 100%;
+  padding-left: var(--spacing-xs);
+  position: relative;
+  margin-bottom: var(--spacing-xs);
 }
 
-.comment {
-  border-bottom: 1px solid var(--border-gray);
-  padding-bottom: var(--spacing-xs);
+.to_login {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom:0;
+  z-index: 1;
+}
+
+.comment_form input {
+  height: 100%;
+  width: 100%;
+  font-size: 1rem;
 }
 
 .comments_btn {
   background-color: white;
-  border: 1px solid var(--purple);
   color: var(--purple);
-  width: 6rem;
-  height: 6rem;
+  font-size: var(--smallest-font);
+  font-weight: bold;
+  height: 90%;
+  width: 15%;
+  margin: 0
 }
 
-.notice {
+.comment {
+  display: flex;
+  flex-direction: column;
+  margin: var(--spacing-xs) 0;
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.comment_top {
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid var(--border-gray);
-  padding-bottom: var(--spacing-xs);
+  align-items: center;
+  margin-bottom: 0.25rem;
+  font-size: var(--smallest-font);
+}
+
+.writer {
+  font-weight: bold;
+}
+
+.timestamp {
+  margin-left: var(--spacing-xxs);
+  color: var(--gray);
+}
+
+.comment_bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.comment_bottom button {
+  background-color: white;
+  margin-left: var(--spacing-xxs);
+  color: var(--purple);
 }
