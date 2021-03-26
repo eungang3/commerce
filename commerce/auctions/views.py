@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.forms import ModelForm
 from django import forms
+from django.core.exceptions import ValidationError
 
 from .models import *
 
@@ -91,6 +92,13 @@ class BiddingForm(ModelForm):
             'price':''
         }
 
+    def clean(self):
+        cleaned_data = super().clean()
+        price = cleaned_data.get('price')
+        if price < 10:
+            raise forms.ValidationError('wrong')
+
+
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
@@ -106,7 +114,6 @@ class CommentForm(ModelForm):
 def get_listing(request, catname, listingid):
     return render(request, "auctions/listing.html", {
         "listing": Listing.objects.filter(id=listingid).first(),
-        "current_price": "5000",
         "bidding_form": BiddingForm(),
         "comment_form": CommentForm()
     })
@@ -114,9 +121,32 @@ def get_listing(request, catname, listingid):
 # when user places a bid, save it in database and redirect
 def bid(request):
     if request.method == "POST":
-        form = BiddingForm(request.POST)
+        # get data from submitted form
+        info = request.POST
+        form = BiddingForm(info)
+
         if form.is_valid():
+            # get submitted price
             price = form.cleaned_data['price']
+
+            # get id of listing/user
+            listing_id = info['listing']
+            user_id = info['bidder']
+
+            # get object of listing/user
+            listing = Listing.objects.get(id=listing_id)
+            bidder = User.objects.get(id=user_id)
+
+            # if user placed a bid before, update price field of Bid object
+            if Bid.objects.filter(listing=listing, bidder=bidder).exists():
+                obj = Bid.objects.get(listing=listing, bidder=bidder)
+                obj.price = price
+                obj.save()
+
+            # else, create new Bid object
+            else:
+                obj = Bid(listing=listing, bidder=bidder, price=price)
+                obj.save()
         return HttpResponseRedirect(reverse("index"))
 
     else:
