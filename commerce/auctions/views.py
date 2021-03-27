@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib import messages
 
 from .models import *
 
@@ -83,10 +84,10 @@ def register(request):
 
 # for rendering each category page
 def get_items(request, catname):
-    category = Category.objects.filter(english_name=catname).first()
+    category = Category.objects.get(english_name=catname)
     return render(request, "auctions/items.html", {
-        "catname" : category,
-        "listings" : Listing.objects.filter(category=category.id)
+    "catname" : Category.objects.get(english_name=catname),
+    "listings" : Listing.objects.filter(category=category.id)
     })
 
 # for rendering whole category page
@@ -97,6 +98,7 @@ def get_all_items(request):
     })
 
 # create the form class
+
 class BiddingForm(ModelForm):
     class Meta:
         model = Bid
@@ -110,10 +112,6 @@ class BiddingForm(ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        price = cleaned_data.get('price')
-        if price < 10:
-            raise forms.ValidationError('wrong')
-
 
 class CommentForm(ModelForm):
     class Meta:
@@ -131,42 +129,63 @@ class CommentForm(ModelForm):
 
 # for rendering each listing page
 def get_listing(request, catname, listingid):
+    listing = Listing.objects.get(id=listingid)
     return render(request, "auctions/listing.html", {
-        "listing": Listing.objects.filter(id=listingid).first(),
+        "listing": listing,
         "bidding_form": BiddingForm(),
-        "comment_form": CommentForm()
+        "comment_form": CommentForm(),
+        "bidders_count" : Bid.objects.filter(listing=listing).count()
     })
 
 # when user places a bid, save it in database and redirect
-def bid(request):
+def bid(request, listingid):
+    
+    # get category of the listing, listing, and bidder info
+    listing = Listing.objects.get(id=listingid)
+    catname = listing.category
+    bidder = request.user
+    
     if request.method == "POST":
-        # get data from submitted form
-        info = request.POST
-        form = BiddingForm(info)
+        form = BiddingForm(request.POST)
+        
+        # if form is invalid, end function
+        if not form.is_valid():
+            messages.error(request, "다시 시도해보세요")
+            return HttpResponseRedirect(reverse("get_listing", kwargs={'catname': 'interior','listingid':1}))
 
-        if form.is_valid():
-            # get submitted price
-            price = form.cleaned_data['price']
+        # get submitted price
+        price = form.cleaned_data['price']
 
-            # get id of listing/user
-            listing_id = info['listing']
-            user_id = info['bidder']
+        # check if bidding price is valid
+        # in case there was no previous bid
+        if listing.current_price == 0 and price < listing.starting_price:
+            messages.error(request, "시작 가격과 같거나 높게 제시하세요")
+            return HttpResponseRedirect(reverse("get_listing", kwargs={'catname': catname,'listingid':listingid}))
 
-            # get object of listing/user
-            listing = Listing.objects.get(id=listing_id)
-            bidder = User.objects.get(id=user_id)
+        # in case there was a bid
+        if listing.current_price != 0 and price <= listing.current_price:
+            messages.error(request, "현재 가격보다 높게 제시하세요")
+            return HttpResponseRedirect(reverse("get_listing", kwargs={'catname': catname,'listingid':listingid}))
+        
+        # update current_price of Listing object
+        listing.current_price = price
+        listing.save()
 
-            # if user placed a bid before, update price field of Bid object
-            if Bid.objects.filter(listing=listing, bidder=bidder).exists():
-                obj = Bid.objects.get(listing=listing, bidder=bidder)
-                obj.price = price
-                obj.save()
+        # if user placed a bid before, update price field of Bid object
+        if Bid.objects.filter(listing=listing, bidder=bidder).exists():             
+            obj = Bid.objects.get(listing=listing, bidder=bidder)
+            obj.price = price
+            obj.save()
 
-            # else, create new Bid object
-            else:
-                obj = Bid(listing=listing, bidder=bidder, price=price)
-                obj.save()
-        return HttpResponseRedirect(reverse("index"))
+        # else, create new Bid object
+        else:
+            obj = Bid(listing=listing, bidder=bidder, price=price)
+            obj.save()
+
+        # show success message
+        messages.success(request, "입찰에 성공했어요!")
+
+        return HttpResponseRedirect(reverse("get_listing", kwargs={'catname': catname,'listingid':listingid}))
 
     else:
         return render(request, "auctions/listing.html", {

@@ -13,8 +13,13 @@
       <div class="bottom">
         <p class="listing_title">{{ listing.title }}</p>
         <div class="info">
-          <p class="price">{{ listing.current_price|intcomma }}원</p>
-          <p class="bidders">0 bids</p>
+          <p class="price">
+            {% if listing.current_price == 0 %}
+              {{ listing.starting_price|intcomma }}원
+            {% else %}
+              {{ listing.current_price|intcomma }}원
+            {% endif %}
+          </p>
         </div>
       </div>
     </a>

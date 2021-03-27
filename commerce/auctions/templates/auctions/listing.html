@@ -26,17 +26,26 @@
         </div>
         <div class="current_container">
           <p class="sub_name">현재 가격</p>
-          <p class="current_price">{{ listing.current_price|intcomma }}원</p>
-          <p class="bidders">0 bids</p>
+          <p class="current_price">
+            {% if listing.current_price == 0 %}
+              {{ listing.starting_price|intcomma }}원
+            {% else %}
+              {{ listing.current_price|intcomma }}원
+            {% endif %}
+          </p>
+          <p class="bidders">입찰 수{{ bidders_count }}</p>
         </div>
       </div>
       <p class="description">{{ listing.description }}</p>
-      <form action="{% url 'place_bid' %}" method="post" class="bidding_form">
+      {% if messages %}
+        {% for message in messages %}
+          <script>alert("{{ message }}")</script>
+        {% endfor %}
+      {% endif %}
+      <form action="/bid/{{ listing.id }}/" method="post" class="bidding_form">
         {% if not user.is_authenticated %}
         <a class="to_login" href="{% url 'login' %}">&nbsp;</a>
         {% endif %}
-        <input value="{{ listing.id }}" name="listing" type="hidden">
-        <input value="{{ user.id }}" name="bidder" type="hidden">
         {{ bidding_form }}
         {% csrf_token %}
         <button class="btn bid">입찰하기</button>
