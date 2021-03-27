@@ -1,30 +1,36 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-
-    <h2>Register</h2>
+<div class="login-container register">
+    <h2 class="title">가입하기</h2>
 
     {% if message %}
-        <div>{{ message }}</div>
+        <div class="warning">{{ message }}</div>
     {% endif %}
 
     <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
-        <div class="form-group">
-            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+        <div class="input-area">
+            <label for="username">아이디</label>
+            <input id="username" class="form-control" autofocus type="text" name="username" placeholder="아이디를 입력하세요">
         </div>
-        <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Email Address">
+        <div class="input-area">
+            <label for="email">이메일(선택)</label>
+            <input id="email" class="form-control" type="email" name="email" placeholder="이메일을 입력하세요">
         </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
+        <div class="input-area">
+            <label for="password">비밀번호</label>
+            <input id="password" class="form-control" type="password" name="password" placeholder="비밀번호를 입력하세요">
         </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        <div class="input-area">
+            <label for="password2">비밀번호 재입력</label>
+            <input id="password2" class="form-control" type="password" name="confirmation" placeholder="비밀번호를 다시 입력하세요">
         </div>
-        <button class="btn btn-primary" type="submit" value="Register">가입하기</button>
+        <button class="login btn" type="submit" value="Register">가입하기</button>
     </form>
-
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
-
+    <div class="register_here">
+        계정이 있으신가요? <a href="{% url 'login' %}">로그인</a>
+    </div>
+    
+</div>
 {% endblock %}

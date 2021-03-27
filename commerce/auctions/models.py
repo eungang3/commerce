@@ -24,10 +24,6 @@ class Listing(models.Model):
     winner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="won", null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="items")
 
-    def save(self, *args, **kwargs):
-        self.current_price = self.starting_price
-        super(Listing, self).save(*args, **kwargs)
-
     def __str__(self):
         return f"{self.seller}, {self.title}, {self.description}, {self.starting_price}, {self.photo}, {self.active}, {self.winner}, {self.category}"
 

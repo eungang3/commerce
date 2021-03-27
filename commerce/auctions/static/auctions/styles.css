@@ -52,6 +52,46 @@ body{
   height: 100%;
 }
 
+/* 로그인, 회원가입 화면 */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  margin-bottom: var(--spacing-xxs);
+}
+
+.input-area {
+  margin-bottom: var(--spacing-xs);
+}
+
+.input-area input {
+  border-radius: 0.2rem;
+}
+
+.login{
+  margin-bottom: var(--spacing-m);
+}
+
+.register_here a {
+  color: var(--purple);
+  margin-left: 0.2rem;
+}
+
+form {
+  width: 100%;
+}
+
+.input-area {
+  width: 30%;
+}
+
+.warning {
+  margin-bottom: var(--spacing-xxs);
+  color: var(--purple);
+}
 
 /* footer */
 footer {
@@ -392,11 +432,10 @@ h2 {
 /* bidding form */
 .bidding_form {
   display: flex;
-  width: 100%;
   position: relative;
 }
 
-.bidding_form input {
+ input {
   height: var(--spacing-l);
   border-radius: 1.2rem;
   border: 1px solid var(--border-gray);
@@ -436,7 +475,6 @@ h2 {
   height: var(--spacing-l);
   border-radius: 0.2rem;
   border: 1px solid var(--border-gray);
-  width: 100%;
   padding-left: var(--spacing-xs);
   position: relative;
   margin-bottom: var(--spacing-xs);
@@ -456,6 +494,8 @@ h2 {
   height: 100%;
   width: 100%;
   font-size: 1rem;
+  padding: 0;
+  border: 0;
 }
 
 .comments_btn {

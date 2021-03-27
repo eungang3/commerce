@@ -28,7 +28,7 @@ def login_view(request):
             return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "auctions/login.html", {
-                "message": "Invalid username and/or password."
+                "message": "유효하지 않은 아이디/비밀번호입니다"
             })
     else:
         return render(request, "auctions/login.html")
@@ -47,9 +47,25 @@ def register(request):
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
+
+        if not username:
+            return render(request, "auctions/register.html", {
+                "message": "아이디를 입력하세요"
+            })
+
+        if not password:
+            return render(request, "auctions/register.html", {
+                "message": "비밀번호를 입력하세요"
+            })
+
+        if not confirmation:
+            return render(request, "auctions/register.html", {
+                "message": "비밀번호를 다시 입력하세요"
+            })
+
         if password != confirmation:
             return render(request, "auctions/register.html", {
-                "message": "Passwords must match."
+                "message": "비밀번호가 일치하지 않습니다."
             })
 
         # Attempt to create new user
@@ -58,7 +74,7 @@ def register(request):
             user.save()
         except IntegrityError:
             return render(request, "auctions/register.html", {
-                "message": "Username already taken."
+                "message": "이미 존재하는 아이디입니다."
             })
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
@@ -109,6 +125,9 @@ class CommentForm(ModelForm):
         labels = {
             'content': ''
         }
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.fields['content'].widget.attrs['class'] = 'comment_input'
 
 # for rendering each listing page
 def get_listing(request, catname, listingid):
