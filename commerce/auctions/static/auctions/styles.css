@@ -451,6 +451,25 @@ h2 {
   margin-right: 0;
 }
 
+/* confirm form */
+.confirm_form{
+  display: flex;
+  flex-direction: column;
+}
+
+.notice_area {
+  display: flex;
+  flex-direction: row;
+  margin-top: var(--spacing-xxs);
+  color: var(--purple);
+
+}
+
+.confirm_notice {
+  font-size: var(--smallest-font);
+  margin-left: 0.25rem;
+}
+
 /* comments */
 .comments {
   margin-top : var(--spacing-xxl-3);
