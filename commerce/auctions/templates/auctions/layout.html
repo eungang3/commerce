@@ -28,7 +28,13 @@
             <div class="innermost">
               <h1 class="logo"><a href="{% url 'index' %}">Gaji Market</a></h1>
               <div class="right">
-                <button type="submit" class="btn">팔기</button>
+                {% if user.is_authenticated %}
+                <a href="{% url 'sell' %}" class="btn sell">
+                {% else %}
+                <a href="{% url 'login' %}" class="btn sell">
+                {% endif %}
+                  <p>팔기</p>
+                </a>
                 <div class="dropdown">
                   <button class="dropdown-btn">
                     {% if user.is_authenticated %}

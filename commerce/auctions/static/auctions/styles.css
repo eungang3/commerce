@@ -40,6 +40,10 @@ input, button {
   outline: none;
 }
 
+::placeholder {
+  color: var(--border-gray);
+}
+
 button {
   cursor: pointer;
 }
@@ -59,7 +63,8 @@ body{
   width: 100%;
 }
 
-.label {
+label {
+  display: block;
   margin-bottom: var(--spacing-xxs);
 }
 
@@ -69,6 +74,7 @@ body{
 
 .input-area input {
   border-radius: 0.2rem;
+  padding-left: var(--spacing-xxs);
 }
 
 .login{
@@ -199,6 +205,16 @@ nav ul {
   color: white;
   margin-right: 1.5rem;
   font-size: 1rem;
+}
+
+.sell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sell p {
+  color: white;
 }
 
 /* dropdown */
@@ -435,7 +451,7 @@ h2 {
   position: relative;
 }
 
- input {
+ input, textarea, select {
   height: var(--spacing-l);
   border-radius: 1.2rem;
   border: 1px solid var(--border-gray);
@@ -494,9 +510,9 @@ h2 {
   height: var(--spacing-l);
   border-radius: 0.2rem;
   border: 1px solid var(--border-gray);
-  padding-left: var(--spacing-xs);
   position: relative;
   margin-bottom: var(--spacing-xs);
+  padding-left: var(--spacing-xxs);
 }
 
 .to_login {
@@ -562,4 +578,44 @@ h2 {
   background-color: white;
   margin-left: var(--spacing-xxs);
   color: var(--purple);
+}
+
+/* sell */
+.sell-area {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sell_form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sell_form input, textarea, select {
+  border-radius: 0.2rem;
+  margin-bottom: var(--spacing-xs);
+  width: 60%;
+  padding-left: var(--spacing-xxs);
+}
+
+.sell_form input:nth-child(7) {
+  width: 12rem;
+} 
+
+textarea {
+  height: 10rem;
+  padding: var(--spacing-xxs);
+}
+
+select {
+  width: 12rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sell_form .btn {
+  margin-top: var(--spacing-xxs);
 }

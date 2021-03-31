@@ -110,9 +110,6 @@ class BiddingForm(ModelForm):
             'price':''
         }
 
-    def clean(self):
-        cleaned_data = super().clean()
-
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
@@ -209,4 +206,36 @@ def comment(request):
             "current_price": "5000",
             "bidding_form": BiddingForm(),
             "comment_form": CommentForm()
+        })
+
+# form for sell function
+
+class SellForm(ModelForm):
+    class Meta:
+        model = Listing
+        fields = ['category', 'title', 'starting_price', 'description']
+   
+        labels = {
+            'title':'제목',
+            'description': '설명',
+            'starting_price':'시작 가격'
+        }
+
+    photo = forms.URLField(required=False, label="사진 (선택)", widget=forms.TextInput(attrs={'placeholder': 'URL을 입력하세요(미입력시 기본 사진 사용)'}))
+
+    category = forms.ModelChoiceField(label="카테고리",queryset=Category.objects.all(), empty_label='카테고리를 선택하세요')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
+        self.fields['starting_price'].widget.attrs['min'] = 1
+ 
+
+def sell(request):
+    if request.method =="POST":
+        return HttpResponse("yay")
+    
+    else:
+        return render(request, "auctions/sell.html", {
+            "form" : SellForm()
         })

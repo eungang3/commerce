@@ -1,2 +1,14 @@
 {% extends "auctions/layout.html" %}
+{% block body %}
+<div class="sell-area">
+    <h2 class="title">
+        매물 올리기
+    </h2>
+    <form action="/sell" method="post" class="sell_form">
+        {% csrf_token %}
+        {{ form }}
+    <button class="btn">올리기</button>
+    </form>
+    {% endblock %}
 
+</div>
